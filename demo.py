@@ -13,8 +13,10 @@ print("Hello, World!"[4])
 print("Hello, World!"[0:5])
 
 # 数据类型
+# 在 Python 中没有double类型，有浮点数（float）类型，其遵循双精度（double）浮点数的标准，通常占用 8 个字节（64 位）
 print(type(9))
 print(type(9.0))
+print(type(9.00))
 print(type(True))
 print(type(None))
 
@@ -36,6 +38,7 @@ print(type(None))
 # else:
 #     print("您的心情不好！")
 
+# 嵌套条件语句
 # score = int(input("请输入您的成绩："))
 # if 0<= score <= 100:
 #     if score >= 90:
@@ -62,15 +65,15 @@ list1.append(6)
 list1.insert(0, 0)
 list1.remove(3)
 print(list1) # [0, 1, 2, 4, 5, 6]
-print(list1[0])
+print(list1[0]) # 0
 print(list1[1:3]) # [1, 2]
 print(list1[1:]) # [1, 2, 4, 5, 6]
 print(list1[:3]) # [0, 1, 2]
 print(list1[-1]) # 6
 print(list1[-3:-1]) # [4, 5]
 print(list1.index(4)) # 3
-print(4 in list1)
-print(len(list1))
+print(4 in list1)   # True
+print(len(list1))   # 6
 
 
 # 集合：set 无序、不可重复
@@ -114,38 +117,38 @@ dict1 = {
 print(dict1)
 print(dict1["name"])
 print(dict1["age"])
-print("name" in dict1)
-print("address" in dict1)
-print("张三" in dict1)
+print("name" in dict1) # True
+print("address" in dict1) # False
+print("张三" in dict1) # False
 dict1["address"] = "北京"
-print(dict1)
+print(dict1)    # {'name': '张三', 'age': 23, 'phone': '123456', 'address': '北京'}
 del dict1["phone"]
-print(dict1)
-print(len(dict1))
-print(dict1.keys())
-print(dict1.values())
-print(dict1.items())
+print(dict1)    # {'name': '张三', 'age': 23, 'address': '北京'}
+print(len(dict1))   # 3
+print(dict1.keys()) # dict_keys(['name', 'age', 'address'])
+print(dict1.values())   # dict_values(['张三', 23, '北京'])
+print(dict1.items())    # dict_items([('name', '张三'), ('age', 23), ('address', '北京')])
 
 # for 循环
 print("for 循环：====================")
 for i in range(5):
-    print(i)
+    print(i)    # 0 1 2 3 4
 print("for 循环 finish1")
 for i in range(1, 5):
-    print(i)
+    print(i)    # 1 2 3 4
 print("for 循环 finish2")
 for i in range(1, 10, 2):
-    print(i)
+    print(i)    # 1 3 5 7 9
 print("for 循环 finish3")
 for i in range(5, 0, -1):
-    print(i)
+    print(i)    # 5 4 3 2 1
 print("for 循环 finish4")
 
 # while 循环
 print("while 循环：====================")
 i = 0
 while i < 5:
-    print(i)
+    print(i)    # 0 1 2 3 4
     i += 1
 print("while 循环 finish")
 
@@ -203,13 +206,13 @@ print(add(a=1, b=2, c=3, d=4, e=5))
 print("高阶函数和匿名函数：====================")
 def add(a, b, f):
     return f(a) + f(b)
-print(add(3, -4, abs))
-print(add(3, 4, lambda x: x**2))
+print(add(3, -4, abs))  # 7
+print(add(3, 4, lambda x: x**2)) # 25
 print("匿名函数：====================")
 # 匿名函数也有局限性，冒号后没法有多个语句或表达式，只适用于比较简单的场景
 add = lambda a, b: a + b
-print(add(3, 4))
-print((lambda a, b, f: f(a) + f(b))(3, 4, lambda x: x**2))
+print(add(3, 4))    # 7
+print((lambda a, b, f: f(a) + f(b))(3, 4, lambda x: x**2))  # 25
 
 
 # 模块导入
@@ -309,17 +312,19 @@ file.close()
 # open()的第二个参数需要传入附加模式”a”参数，表示追加内容,不存在则创建
 print("文件追加：====================")
 with open("./demo.txt", "a", encoding="utf-8") as file:
-    file.write("\n追加内容")
+    file.write("==这里是追加内容")
     file = open("./demo.txt", "r", encoding="utf-8")
     content = file.read()
     print(content)
 
 #  open()方法的第二个参数传入”r+”参数，就可以同时支持读写文件
 print("文件读写：====================")
-with open("./demo.txt", "r+", encoding="utf-8") as file:
-    file.write("Hello, World!\n")
-    file.write("啊哈哈")
-    file.seek(0)
+with open("./demo.txt", "r+", encoding="utf-8", errors="ignore") as file:
+    file.seek(60)
+    file.write("\n")
+    file.write("你好啊！\n")
+    file.write("可读写文件")
+    file.seek(0)   # seek()方法可以移动文件读取指针到指定位置，0表示文件开头
     content = file.read()
     print(content)
 
