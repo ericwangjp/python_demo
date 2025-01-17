@@ -312,7 +312,7 @@ file.close()
 # open()的第二个参数需要传入附加模式”a”参数，表示追加内容,不存在则创建
 print("文件追加：====================")
 with open("./demo.txt", "a", encoding="utf-8") as file:
-    file.write("==这里是追加内容")
+    file.write("\n==这里是追加内容")
     file = open("./demo.txt", "r", encoding="utf-8")
     content = file.read()
     print(content)
